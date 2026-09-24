@@ -1,0 +1,124 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Manrope", sans-serif;
+  --font-display: "Sora", sans-serif;
+  --radius-sm: calc(var(--radius) - 3px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-on-dark: var(--on-dark);
+  --color-on-dark-muted: var(--on-dark-muted);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+}
+
+:root {
+  --radius: 0.45rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.25 0.031 250);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.031 250);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.031 250);
+  --primary: oklch(0.82 0.17 88);
+  --primary-foreground: oklch(0.22 0.028 250);
+  --secondary: oklch(0.965 0.011 250);
+  --secondary-foreground: oklch(0.25 0.031 250);
+  --muted: oklch(0.975 0.006 250);
+  --muted-foreground: oklch(0.49 0.025 250);
+  --accent: oklch(0.91 0.09 88);
+  --accent-foreground: oklch(0.22 0.028 250);
+  --destructive: oklch(0.58 0.22 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.90 0.012 250);
+  --input: oklch(0.88 0.014 250);
+  --ring: oklch(0.73 0.15 88);
+  --on-dark: oklch(0.99 0 0);
+  --on-dark-muted: oklch(0.82 0.012 250);
+  --success: oklch(0.52 0.15 150);
+  --success-soft: oklch(0.94 0.06 150);
+  --shadow-brand: 0 12px 30px -14px color-mix(in oklab, var(--foreground) 48%, transparent);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--color-background); color: var(--color-foreground); font-family: var(--font-sans); letter-spacing: 0; }
+  button, a, input, textarea, select { outline-offset: 3px; }
+  :focus-visible { outline: 2px solid var(--color-primary); }
+  ::selection { background: var(--color-primary); color: var(--color-primary-foreground); }
+}
+
+@utility site-container { width: min(100% - 2rem, 76rem); margin-inline: auto; }
+@utility section-pad { padding-block: clamp(5rem, 9vw, 8rem); }
+@utility shadow-brand { box-shadow: var(--shadow-brand); }
+
+.nav-link { position: relative; color: var(--color-foreground); font-size: .825rem; font-weight: 700; }
+.nav-link::after { content: ""; position: absolute; right: 0; bottom: -.6rem; left: 0; height: 2px; background: var(--color-primary); transform: scaleX(0); transform-origin: left; transition: transform .2s ease; }
+.nav-link:hover::after { transform: scaleX(1); }
+.hero-overlay { background: linear-gradient(90deg, color-mix(in oklab, var(--foreground) 98%, transparent) 0%, color-mix(in oklab, var(--foreground) 91%, transparent) 38%, color-mix(in oklab, var(--foreground) 30%, transparent) 73%, color-mix(in oklab, var(--foreground) 10%, transparent) 100%); }
+.solar-grid { background-image: linear-gradient(color-mix(in oklab, var(--primary) 22%, transparent) 1px, transparent 1px), linear-gradient(90deg, color-mix(in oklab, var(--primary) 22%, transparent) 1px, transparent 1px); background-size: 38px 38px; }
+.hero-outline { border-color: color-mix(in oklab, var(--on-dark) 55%, transparent); background: color-mix(in oklab, var(--foreground) 25%, transparent); color: var(--on-dark); }
+.hero-outline:hover { border-color: var(--primary); background: var(--on-dark); color: var(--foreground); }
+.image-frame::before { content: ""; position: absolute; z-index: 1; left: 0; top: 0; width: 30%; height: 8px; background: var(--primary); }
+.service-card { position: relative; overflow: hidden; border: 1px solid var(--border); border-radius: var(--radius); background: var(--card); padding: 2rem; transition: transform .25s ease, box-shadow .25s ease; }
+.service-card::after { content: ""; position: absolute; right: -2rem; top: -2rem; width: 5rem; height: 5rem; background: var(--primary); transform: rotate(45deg); opacity: .2; }
+.service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-brand); }
+.icon-tile { display: grid; width: 3rem; height: 3rem; place-items: center; margin-bottom: 1.5rem; border-radius: var(--radius); background: color-mix(in oklab, var(--primary) 18%, var(--background)); color: var(--foreground); }
+.icon-tile svg { width: 1.35rem; height: 1.35rem; }
+.process-line::before { content: ""; position: absolute; left: 1.75rem; right: 10%; top: 1.75rem; height: 1px; background: color-mix(in oklab, var(--on-dark) 22%, transparent); }
+.benefits-section::after { content: ""; position: absolute; right: -7rem; top: -9rem; width: 24rem; height: 24rem; border: 3rem solid color-mix(in oklab, var(--primary) 22%, transparent); border-radius: 50%; }
+.bg-image-caption { background: linear-gradient(0deg, color-mix(in oklab, var(--foreground) 90%, transparent), transparent); }
+.contact-row { display: flex; align-items: flex-start; gap: 1rem; color: var(--on-dark); }
+.contact-row svg { width: 1.15rem; height: 1.15rem; margin-top: .2rem; flex: none; color: var(--primary); }
+.contact-row span { display: block; font-size: .875rem; line-height: 1.5rem; }
+.contact-row small { display: block; color: var(--on-dark-muted); font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; }
+.form-control { display: flex; width: 100%; height: 2.25rem; border-radius: var(--radius); border: 1px solid var(--input); background: transparent; padding-inline: .75rem; font-size: .875rem; color: var(--foreground); }
+.form-control:focus { box-shadow: 0 0 0 1px var(--ring); }
+.floating-call, .floating-whatsapp { display: grid; width: 3.35rem; height: 3.35rem; place-items: center; border-radius: 50%; box-shadow: var(--shadow-brand); transition: transform .2s ease; }
+.floating-call { background: var(--foreground); color: var(--on-dark); }
+.floating-whatsapp { background: oklch(0.66 0.19 145); color: var(--on-dark); animation: pulse-ring 2.5s infinite; }
+.floating-call:hover, .floating-whatsapp:hover { transform: translateY(-3px) scale(1.04); }
+.floating-call svg, .floating-whatsapp svg { width: 1.35rem; height: 1.35rem; }
+.footer-logo .text-foreground { color: var(--on-dark); }
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@keyframes pulse-ring { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, oklch(0.66 0.19 145) 40%, transparent), var(--shadow-brand); } 50% { box-shadow: 0 0 0 10px transparent, var(--shadow-brand); } }
+
+@media (max-width: 767px) {
+  .hero-section { min-height: 720px; align-items: flex-end; }
+  .hero-overlay { background: linear-gradient(0deg, color-mix(in oklab, var(--foreground) 99%, transparent) 0%, color-mix(in oklab, var(--foreground) 85%, transparent) 58%, color-mix(in oklab, var(--foreground) 28%, transparent) 100%); }
+  .process-line::before { left: 1.75rem; right: auto; top: 1.75rem; bottom: 2rem; width: 1px; height: auto; }
+  .process-line article { padding-left: 5rem; min-height: 7rem; }
+  .process-line article > span { position: absolute; left: 0; top: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .reveal { opacity: 1; transform: none; }
+}
