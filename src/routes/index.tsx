@@ -288,7 +288,7 @@ function SolarWebsite() {
                 <div className="mb-3 flex items-center gap-2 text-primary"><Award className="size-5" /><span className="text-xs font-bold uppercase tracking-[0.16em]">Technical expertise</span></div>
                 <p className="font-bold">Mohammad Usama</p><p className="text-sm text-muted-foreground">M. Tech. (Solar Energy)</p>
                 <div className="my-3 h-px bg-border" />
-                <p className="font-bold">Suhail Ansari</p><p className="text-sm text-muted-foreground">B. Tech. (Electronics)</p>
+                <p className="font-bold">Ali Akbar</p><p className="text-sm text-muted-foreground">B.Tech Electrical and electronics</p>
               </div>
             </div>
             <div className="pt-8 lg:pt-0">
