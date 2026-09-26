@@ -33,13 +33,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import heroImage from "@/assets/solar-hero.jpg";
 import teamImage from "@/assets/solar-team.jpg";
-import residentialImage from "@/assets/solar-residential.jpg";
-import commercialImage from "@/assets/solar-commercial.jpg";
-import industrialImage from "@/assets/solar-industrial.jpg";
+import residentialImage from "@/assets/6410a889-ddbb-4587-9657-401cb7e8432b.png";
+import commercialImage from "@/assets/f8d2db6d-88e8-4641-8773-e1b025ed5a58.png";
+import industrialImage from "@/assets/85ef0831-d6f2-47f5-bf5b-d3c6757ab223.png";
 import maintenanceImage from "@/assets/solar-maintenance.jpg";
 
-const phoneHref = "tel:+919999999999";
-const whatsappHref = "https://wa.me/919999999999?text=Hello%20Sun%20Faith%20Energy%2C%20I%20want%20to%20know%20more%20about%20your%20solar%20solutions.";
+const phoneHref = "tel:+919251245006";
+const whatsappHref = "https://wa.me/919251245006?text=Hello%20Sun%20Faith%20Energy%2C%20I%20want%20to%20know%20more%20about%20your%20solar%20solutions.";
 
 const logoSrc = "/sun-faith-energy-logo.png";
 
@@ -48,11 +48,10 @@ function BrandLogo({ footer = false }: { footer?: boolean }) {
     <a
       href="#home"
       aria-label="Sun Faith Energy Solutions - Home"
-      className={`group flex shrink-0 items-center ${
-        footer
-          ? "w-fit rounded-xl  px-4 py-2.5 shadow-lg"
-          : "w-[155px] sm:w-[178px]"
-      }`}
+      className={`group flex shrink-0 items-center ${footer
+        ? "w-fit rounded-xl  px-4 py-2.5 shadow-lg"
+        : "w-[155px] sm:w-[178px]"
+        }`}
     >
       <img
         src={logoSrc}
@@ -61,9 +60,8 @@ function BrandLogo({ footer = false }: { footer?: boolean }) {
         height={70}
         loading={footer ? "lazy" : "eager"}
         decoding="async"
-        className={`h-auto w-full object-contain transition-transform duration-300 group-hover:scale-[1.02] ${
-          footer ? "max-h-16" : "max-h-14"
-        }`}
+        className={`h-auto w-full object-contain transition-transform duration-300 group-hover:scale-[1.02] ${footer ? "max-h-16" : "max-h-14"
+          }`}
       />
     </a>
   );
@@ -120,7 +118,6 @@ const faqs = [
   ["Do you provide installation support?", "Yes. We provide professional installation and ongoing support to help your solar system operate efficiently."],
   ["How can I request a solar consultation?", "Use the enquiry form, call us, or message us on WhatsApp. Our team will connect with you to understand your needs."],
 ];
-
 function SectionTitle({ eyebrow, title, copy, light = false }: { eyebrow: string; title: string; copy?: string; light?: boolean }) {
   return (
     <div className={`reveal max-w-2xl ${light ? "text-on-dark" : ""}`}>
@@ -135,6 +132,13 @@ function SolarWebsite() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [selectedProject, setSelectedProject] = useState<{
+    image: string;
+    title: string;
+    location: string;
+    type: string;
+    description: string;
+  } | null>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add("is-visible")), { threshold: 0.12 });
@@ -183,7 +187,7 @@ function SolarWebsite() {
               className="hidden items-center gap-2 rounded-full border border-border bg-muted/50 px-3.5 py-2 text-sm font-semibold text-foreground transition hover:border-primary/50 hover:bg-primary/5 xl:flex"
             >
               <Phone className="size-4 text-primary" />
-              <span>+91 90240 42324</span>
+              <span>+919251245006</span>
             </a>
             <Button asChild className="hidden h-11 rounded-full px-5 shadow-sm sm:inline-flex">
               <a href="#contact">Get a Quote <ArrowRight /></a>
@@ -288,7 +292,7 @@ function SolarWebsite() {
                 <div className="mb-3 flex items-center gap-2 text-primary"><Award className="size-5" /><span className="text-xs font-bold uppercase tracking-[0.16em]">Technical expertise</span></div>
                 <p className="font-bold">Mohammad Usama</p><p className="text-sm text-muted-foreground">M. Tech. (Solar Energy)</p>
                 <div className="my-3 h-px bg-border" />
-                <p className="font-bold">Ali Akbar</p><p className="text-sm text-muted-foreground">B.Tech Electrical and electronics</p>
+                <p className="font-bold">Ali Akbar</p><p className="text-sm text-muted-foreground">B.Tech(Electrical and electronics)</p>
               </div>
             </div>
             <div className="pt-8 lg:pt-0">
@@ -353,28 +357,402 @@ function SolarWebsite() {
           <div className="site-container relative z-10 grid items-center gap-12 lg:grid-cols-2">
             <SectionTitle eyebrow="Brighter possibilities" title="Make the Switch to Solar" copy="A considered solar investment can help you use cleaner energy today while building toward a more sustainable future." />
             <div className="grid gap-4 sm:grid-cols-2">
-              {[[Leaf,"Clean & Renewable Energy"],[Zap,"Reduced Electricity Dependence"],[PiggyBank,"Smart Long-Term Investment"],[Sun,"Sustainable Energy Future"]].map(([Icon,label]) => { const BenefitIcon = Icon as typeof Leaf; return <div key={String(label)} className="reveal flex min-h-32 items-start gap-4 rounded-md border border-border bg-background p-5 shadow-sm"><span className="icon-tile shrink-0"><BenefitIcon /></span><h3 className="pt-2 font-bold leading-6">{String(label)}</h3></div>})}
+              {[[Leaf, "Clean & Renewable Energy"], [Zap, "Reduced Electricity Dependence"], [PiggyBank, "Smart Long-Term Investment"], [Sun, "Sustainable Energy Future"]].map(([Icon, label]) => { const BenefitIcon = Icon as typeof Leaf; return <div key={String(label)} className="reveal flex min-h-32 items-start gap-4 rounded-md border border-border bg-background p-5 shadow-sm"><span className="icon-tile shrink-0"><BenefitIcon /></span><h3 className="pt-2 font-bold leading-6">{String(label)}</h3></div> })}
             </div>
           </div>
         </section>
 
-        <section id="projects" className="section-pad scroll-mt-20 bg-background">
+        <section
+          id="projects"
+          className="section-pad scroll-mt-20 bg-background"
+        >
           <div className="site-container">
-            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end"><SectionTitle eyebrow="Installation gallery" title="Our Solar Work" copy="A visual look at residential, commercial and industrial solar installation environments." /><p className="max-w-sm text-sm leading-6 text-muted-foreground">Illustrative solar installation imagery. Project-specific portfolio details can be added when available.</p></div>
-            <div className="mt-12 grid auto-rows-[220px] gap-4 sm:grid-cols-2 lg:grid-cols-3">
+
+            {/* ================= HEADER ================= */}
+            <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+
+              <SectionTitle
+                eyebrow="Installation Gallery"
+                title="Our Solar Work"
+                copy="Explore real solar installation environments and discover how Sun Faith Energy Solutions approaches clean-energy projects."
+              />
+
+              <p className="max-w-sm text-sm leading-6 text-muted-foreground">
+                Click any project image to view its available project details.
+              </p>
+
+            </div>
+
+
+            {/* ================= PROJECT GRID ================= */}
+            <div className="mt-12 grid auto-rows-[240px] gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
               {[
-                [residentialImage,"Rooftop solar panels on an Indian residence"], [commercialImage,"Commercial rooftop solar installation"], [industrialImage,"Industrial solar panel array at sunset"],
-                [teamImage,"Solar engineers inspecting rooftop panels"], [maintenanceImage,"Technician maintaining a solar installation"], [heroImage,"Modern home powered by rooftop solar panels"],
-              ].map(([src, alt], index) => <figure key={alt} className={`gallery-item reveal group relative overflow-hidden rounded-md ${index === 0 || index === 5 ? "sm:row-span-2" : ""}`}><img src={src} alt={alt} loading="lazy" width={1200} height={912} className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" /><div className="absolute inset-x-0 bottom-0 bg-image-caption p-5"><span className="text-sm font-semibold text-on-dark">Solar installation</span></div></figure>)}
+                {
+                  image: residentialImage,
+                  title: "5 kW On-Grid Solar System",
+                  location: "Namrata Awas, Bajrang Nagar, Kota",
+                  type: "On-Grid Solar System",
+                  description:
+                    "A 5 kW on-grid solar system installed with Micro Inverter Technology at Namrata Awas, Bajrang Nagar, Kota.",
+                },
+
+                {
+                  image: industrialImage,
+                  title: "18 kW On-Grid Solar System Installation",
+                  location: "Talwandi, Kota",
+                  type: "On-Grid Solar System",
+                  description:
+                    "An 18 kW on-grid solar system installation at Talwandi, Kota, completed with high-quality materials and a professionally arranged rooftop solar setup.",
+                },
+
+                {
+                  image: commercialImage,
+                  title: "Premium Solar Installation",
+                  location: "Location to be updated",
+                  type: "Solar Installation",
+                  description:
+                    "Premium solar installation completed using high-quality materials with neatly organized inverter, protection equipment and conduit wiring.",
+                },
+
+                {
+                  image: teamImage,
+                  title: "Solar Installation Team",
+                  location: "Project location to be updated",
+                  type: "Installation & Inspection",
+                  description:
+                    "Solar installation and inspection work carried out by the technical team.",
+                },
+
+                {
+                  image: maintenanceImage,
+                  title: "Solar System Maintenance",
+                  location: "Project location to be updated",
+                  type: "Solar Maintenance",
+                  description:
+                    "Solar system maintenance and inspection work. Project-specific details will be added when available.",
+                },
+
+                {
+                  image: heroImage,
+                  title: "Residential Rooftop Solar",
+                  location: "Project location to be updated",
+                  type: "Residential Solar",
+                  description:
+                    "Modern residential rooftop solar installation environment. Project-specific details will be added when available.",
+                },
+              ].map((project, index) => (
+
+                <button
+                  key={`${project.title}-${index}`}
+                  type="button"
+                  onClick={() => setSelectedProject(project)}
+                  className={`
+            gallery-item
+            reveal
+            group
+            relative
+            overflow-hidden
+            rounded-2xl
+            border
+            border-border/60
+            bg-muted
+            text-left
+            shadow-sm
+            transition-all
+            duration-300
+            hover:-translate-y-1
+            hover:shadow-[0_20px_50px_rgba(23,35,49,0.14)]
+            focus:outline-none
+            focus-visible:ring-2
+            focus-visible:ring-primary
+            focus-visible:ring-offset-2
+            ${index === 0 || index === 5
+                      ? "sm:row-span-2"
+                      : ""
+                    }
+          `}
+                  aria-label={`View details for ${project.title}`}
+                >
+
+                  {/* IMAGE */}
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    loading={index === 0 ? "eager" : "lazy"}
+                    width={1200}
+                    height={912}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+
+
+                  {/* DARK GRADIENT */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#172331]/90 via-[#172331]/20 to-transparent opacity-90 transition-opacity duration-300 group-hover:opacity-100" />
+
+
+                  {/* TOP TAG */}
+                  <div className="absolute left-4 top-4">
+
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-[#172331]/75 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur-md">
+
+                      <Sun className="size-3 text-primary" />
+
+                      Solar Project
+
+                    </span>
+
+                  </div>
+
+
+                  {/* BOTTOM CONTENT */}
+                  <div className="absolute inset-x-0 bottom-0 p-5">
+
+                    <div className="flex items-end justify-between gap-4">
+
+                      <div>
+
+                        <h3 className="text-base font-extrabold leading-6 text-white sm:text-lg">
+                          {project.title}
+                        </h3>
+
+                        <p className="mt-1 flex items-center gap-1.5 text-xs font-medium text-white/70">
+                          <MapPin className="size-3.5 text-primary" />
+                          {project.location}
+                        </p>
+
+                      </div>
+
+
+                      {/* VIEW ICON */}
+                      <span className="grid size-10 shrink-0 place-items-center rounded-full bg-primary text-[#172331] opacity-0 shadow-lg transition-all duration-300 group-hover:opacity-100">
+
+                        <ArrowRight className="size-4 -rotate-45 transition-transform duration-300 group-hover:rotate-0" />
+
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </button>
+
+              ))}
+
             </div>
+
+
+            {/* ================= BOTTOM CTA ================= */}
+            <div className="mt-10 flex justify-center">
+
+              <a
+                href="#contact"
+                className="inline-flex h-12 items-center gap-2 rounded-full border border-border bg-white px-6 text-sm font-bold text-foreground shadow-sm transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-primary/[0.04]"
+              >
+                Discuss Your Solar Requirement
+
+                <ArrowRight className="size-4 text-primary" />
+              </a>
+
+            </div>
+
           </div>
+
+
+          {/* =====================================================
+      PROJECT DETAILS MODAL
+  ====================================================== */}
+
+          {selectedProject && (
+            <div
+              className="fixed inset-0 z-[100] flex items-center justify-center bg-[#172331]/80 p-4 backdrop-blur-md"
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${selectedProject.title} project details`}
+              onClick={() => setSelectedProject(null)}
+            >
+
+              <div
+                className="relative max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-3xl bg-white shadow-[0_30px_100px_rgba(0,0,0,0.30)]"
+                onClick={(event) => event.stopPropagation()}
+              >
+
+                {/* CLOSE */}
+                <button
+                  type="button"
+                  onClick={() => setSelectedProject(null)}
+                  aria-label="Close project details"
+                  className="absolute right-4 top-4 z-20 grid size-10 place-items-center rounded-full bg-[#172331]/80 text-white backdrop-blur-md transition hover:bg-primary hover:text-[#172331]"
+                >
+                  <X className="size-5" />
+                </button>
+
+
+                <div className="grid max-h-[92vh] overflow-y-auto md:grid-cols-[1.05fr_0.95fr]">
+
+
+                  {/* ================= MODAL IMAGE ================= */}
+                  <div className="relative min-h-[300px] bg-[#172331] md:min-h-[560px]">
+
+                    <img
+                      src={selectedProject.image}
+                      alt={selectedProject.title}
+                      className="h-full min-h-[300px] w-full object-cover md:min-h-[560px]"
+                    />
+
+                    {/* image overlay */}
+                    <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#172331]/80 to-transparent p-6 md:p-8">
+
+                      <span className="inline-flex items-center gap-2 rounded-full bg-primary px-3 py-1.5 text-xs font-bold text-[#172331]">
+                        <Sun className="size-3.5" />
+                        Solar Installation
+                      </span>
+
+                    </div>
+
+                  </div>
+
+
+                  {/* ================= DETAILS ================= */}
+                  <div className="flex flex-col p-7 sm:p-9 md:p-10">
+
+                    <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-primary">
+                      Project Details
+                    </span>
+
+
+                    <h3 className="mt-3 font-display text-2xl font-extrabold leading-tight tracking-tight text-[#172331] sm:text-3xl">
+                      {selectedProject.title}
+                    </h3>
+
+
+                    {/* LOCATION */}
+                    <div className="mt-5 flex items-start gap-3">
+
+                      <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-primary/10">
+                        <MapPin className="size-5 text-primary" />
+                      </span>
+
+                      <div>
+                        <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                          Location
+                        </p>
+
+                        <p className="mt-1 text-sm font-semibold text-[#172331]">
+                          {selectedProject.location}
+                        </p>
+                      </div>
+
+                    </div>
+
+
+                    <div className="my-7 h-px bg-border" />
+
+
+                    {/* PROJECT TYPE */}
+                    <div>
+
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                        System Type
+                      </p>
+
+                      <p className="mt-2 font-semibold text-[#172331]">
+                        {selectedProject.type}
+                      </p>
+
+                    </div>
+
+
+                    {/* DESCRIPTION */}
+                    <div className="mt-7">
+
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                        About This Project
+                      </p>
+
+                      <p className="mt-2 text-sm leading-7 text-muted-foreground">
+                        {selectedProject.description}
+                      </p>
+
+                    </div>
+
+
+                    {/* CTA */}
+                    <div className="mt-auto pt-8">
+
+                      <a
+                        href="#contact"
+                        onClick={() => setSelectedProject(null)}
+                        className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-primary px-6 text-sm font-bold text-[#172331] shadow-[0_10px_25px_rgba(249,197,21,0.22)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_30px_rgba(249,197,21,0.30)]"
+                      >
+                        Discuss Your Solar Requirement
+
+                        <ArrowRight className="size-4" />
+
+                      </a>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          )}
+
         </section>
 
-        <section className="section-pad bg-muted">
+        <section id="testimonials" className="section-pad bg-muted">
           <div className="site-container">
-            <SectionTitle eyebrow="Service values" title="What Our Customers Value" copy="The qualities we focus on in every conversation and every installation." />
+            <SectionTitle
+              eyebrow="Customer Reviews"
+              title="What Our Customers Say"
+              copy="Our customers value professional installation, quality materials and reliable solar solutions."
+            />
+
             <div className="mt-12 grid gap-5 md:grid-cols-3">
-              {[[MessageCircle,"Reliable communication","Clear, timely information so you understand each stage."],[ClipboardCheck,"Professional approach","Thoughtful assessment and a respectful, organized process."],[ShieldCheck,"Quality-focused execution","Careful attention to installation quality and long-term performance."]].map(([Icon,title,text]) => { const ValueIcon = Icon as typeof MessageCircle; return <article key={String(title)} className="reveal rounded-2xl border border-border bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"><ValueIcon className="size-8 text-primary"/><h3 className="mt-7 text-xl font-bold">{String(title)}</h3><p className="mt-3 leading-7 text-muted-foreground">{String(text)}</p></article>})}
+              {[
+                {
+                  name: "Rahul Sharma",
+                  role: "Residential Customer",
+                  text: "Very professional service. The installation was completed neatly and the team explained everything clearly.",
+                },
+                {
+                  name: "Amit Verma",
+                  role: "Solar Customer",
+                  text: "Good quality work and proper installation. The team was supportive throughout the process and completed the work on time.",
+                },
+                {
+                  name: "Sanjay Gupta",
+                  role: "Residential Solar Customer",
+                  text: "Really happy with the overall solar installation. Quality materials, clean work and a professional approach.",
+                },
+              ].map((testimonial) => (
+                <article
+                  key={testimonial.name}
+                  className="reveal rounded-2xl border border-border bg-card p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                >
+                  <div className="flex gap-1 text-yellow-500">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <span key={star} className="text-lg">
+                        ★
+                      </span>
+                    ))}
+                  </div>
+
+                  <p className="mt-6 leading-7 text-muted-foreground">
+                    “{testimonial.text}”
+                  </p>
+
+                  <div className="mt-7 border-t border-border pt-5">
+                    <h3 className="font-bold text-foreground">{testimonial.name}</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {testimonial.role}
+                    </p>
+                  </div>
+                </article>
+              ))}
             </div>
           </div>
         </section>
@@ -389,10 +767,10 @@ function SolarWebsite() {
         </section>
 
         <section className="relative overflow-hidden bg-foreground py-20 text-on-dark">
-          <div className="solar-grid absolute inset-0 opacity-20"/><div className="absolute -right-16 bottom-0 h-44 w-80 rotate-[-12deg] bg-primary/90"/>
+          <div className="solar-grid absolute inset-0 opacity-20" /><div className="absolute -right-16 bottom-0 h-44 w-80 rotate-[-12deg] bg-primary/90" />
           <div className="site-container relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
             <div className="max-w-2xl"><p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-primary">Start your solar journey</p><h2 className="font-display text-4xl font-bold sm:text-5xl">Ready to Switch to Solar?</h2><p className="mt-4 text-lg text-on-dark-muted">Talk to our team and explore the right solar solution for your energy needs.</p></div>
-            <div className="flex flex-wrap gap-3"><Button asChild size="lg" className="h-13"><a href="#contact">Get a Free Quote <ArrowRight/></a></Button><Button asChild size="lg" variant="outline" className="hero-outline h-13"><a href={phoneHref}><Phone/>Call Now</a></Button></div>
+            <div className="flex flex-wrap gap-3"><Button asChild size="lg" className="h-13"><a href="#contact">Get a Free Quote <ArrowRight /></a></Button><Button asChild size="lg" variant="outline" className="hero-outline h-13"><a href={phoneHref}><Phone />Call Now</a></Button></div>
           </div>
         </section>
 
@@ -404,29 +782,29 @@ function SolarWebsite() {
                 <div className="rounded-[1.5rem] bg-foreground p-7 text-on-dark shadow-2xl sm:p-9">
                   <h3 className="text-xl font-bold">Contact information</h3>
                   <div className="mt-7 space-y-6">
-                    <a href={phoneHref} className="contact-row"><Phone/><span><small>Phone</small>+91 9024042324</span></a>
-                    <a href="mailto:sunfaithenergysolutions@gmail.com" className="contact-row break-all"><Mail/><span><small>Email</small>sunfaithenergysolutions@gmail.com</span></a>
-                    <div className="contact-row"><MapPin/><span><small>Address</small>1-C-37 RHB Colony, Kunhari, Kota (Raj)</span></div>
+                    <a href={phoneHref} className="contact-row"><Phone /><span><small>Phone</small>+91 92512 45006 ,+91 9024042324</span></a>
+                    <a href="mailto:sunfaithenergysolutions@gmail.com" className="contact-row break-all"><Mail /><span><small>Email</small>sunfaithenergysolutions@gmail.com</span></a>
+                    <div className="contact-row"><MapPin /><span><small>Address</small>1-C-37 RHB Colony, Kunhari, Kota (Raj)</span></div>
                   </div>
                 </div>
                 <a href="https://www.google.com/maps/search/?api=1&query=Kunhari%2C%20Kota%2C%20Rajasthan" target="_blank" rel="noreferrer" className="map-card group block rounded-md border border-border bg-muted p-6">
-                  <div className="solar-grid h-28 rounded-md bg-secondary"><span className="grid h-full place-items-center"><MapPin className="size-10 text-primary transition-transform group-hover:-translate-y-1"/></span></div>
-                  <div className="mt-4 flex items-center justify-between gap-4"><div><p className="font-bold">Kunhari, Kota, Rajasthan</p><p className="mt-1 text-sm text-muted-foreground">Open location in Google Maps</p></div><ArrowRight className="size-5 text-primary"/></div>
+                  <div className="solar-grid h-28 rounded-md bg-secondary"><span className="grid h-full place-items-center"><MapPin className="size-10 text-primary transition-transform group-hover:-translate-y-1" /></span></div>
+                  <div className="mt-4 flex items-center justify-between gap-4"><div><p className="font-bold">Kunhari, Kota, Rajasthan</p><p className="mt-1 text-sm text-muted-foreground">Open location in Google Maps</p></div><ArrowRight className="size-5 text-primary" /></div>
                 </a>
               </div>
               <div className="rounded-[1.5rem] border border-border bg-card p-6 shadow-xl sm:p-9">
-                {submitted ? <div className="flex min-h-[480px] flex-col items-center justify-center text-center" role="status"><span className="grid size-16 place-items-center rounded-full bg-success-soft text-success"><Check className="size-8"/></span><h3 className="mt-6 text-2xl font-bold">Thank you for your enquiry</h3><p className="mt-3 max-w-sm leading-7 text-muted-foreground">Your details have been noted in this demo. Please call or WhatsApp us for an immediate conversation.</p><Button className="mt-7" onClick={() => setSubmitted(false)}>Send another enquiry</Button></div> :
-                <form onSubmit={submitForm} noValidate>
-                  <h3 className="text-2xl font-bold">Request a consultation</h3><p className="mt-2 text-sm text-muted-foreground">Fields marked with * are required.</p>
-                  <div className="mt-7 grid gap-5 sm:grid-cols-2">
-                    <Field label="Full Name *" error={errors["name"]}><Input name="name" autoComplete="name" aria-invalid={Boolean(errors["name"])} placeholder="Your full name" /></Field>
-                    <Field label="Phone Number *" error={errors["phone"]}><Input name="phone" type="tel" inputMode="numeric" autoComplete="tel" aria-invalid={Boolean(errors["phone"])} placeholder="10-digit mobile number" /></Field>
-                    <Field label="Email" error={errors["email"]}><Input name="email" type="email" autoComplete="email" aria-invalid={Boolean(errors["email"])} placeholder="you@example.com" /></Field>
-                    <Field label="Requirement *" error={errors["requirement"]}><select name="requirement" defaultValue="" aria-invalid={Boolean(errors["requirement"])} className="form-control"><option value="" disabled>Select a solution</option><option>Residential Solar</option><option>Commercial Solar</option><option>Industrial Solar</option><option>Installation</option><option>Maintenance</option><option>General Consultation</option></select></Field>
-                    <div className="sm:col-span-2"><Field label="Message *" error={errors["message"]}><Textarea name="message" aria-invalid={Boolean(errors["message"])} placeholder="Tell us about your property and energy requirement" className="min-h-32" /></Field></div>
-                  </div>
-                  <Button type="submit" size="lg" className="mt-6 h-12 w-full sm:w-auto">Submit Enquiry <ArrowRight/></Button>
-                </form>}
+                {submitted ? <div className="flex min-h-[480px] flex-col items-center justify-center text-center" role="status"><span className="grid size-16 place-items-center rounded-full bg-success-soft text-success"><Check className="size-8" /></span><h3 className="mt-6 text-2xl font-bold">Thank you for your enquiry</h3><p className="mt-3 max-w-sm leading-7 text-muted-foreground">Your details have been noted in this demo. Please call or WhatsApp us for an immediate conversation.</p><Button className="mt-7" onClick={() => setSubmitted(false)}>Send another enquiry</Button></div> :
+                  <form onSubmit={submitForm} noValidate>
+                    <h3 className="text-2xl font-bold">Request a consultation</h3><p className="mt-2 text-sm text-muted-foreground">Fields marked with * are required.</p>
+                    <div className="mt-7 grid gap-5 sm:grid-cols-2">
+                      <Field label="Full Name *" error={errors["name"]}><Input name="name" autoComplete="name" aria-invalid={Boolean(errors["name"])} placeholder="Your full name" /></Field>
+                      <Field label="Phone Number *" error={errors["phone"]}><Input name="phone" type="tel" inputMode="numeric" autoComplete="tel" aria-invalid={Boolean(errors["phone"])} placeholder="10-digit mobile number" /></Field>
+                      <Field label="Email" error={errors["email"]}><Input name="email" type="email" autoComplete="email" aria-invalid={Boolean(errors["email"])} placeholder="you@example.com" /></Field>
+                      <Field label="Requirement *" error={errors["requirement"]}><select name="requirement" defaultValue="" aria-invalid={Boolean(errors["requirement"])} className="form-control"><option value="" disabled>Select a solution</option><option>Residential Solar</option><option>Commercial Solar</option><option>Industrial Solar</option><option>Installation</option><option>Maintenance</option><option>General Consultation</option></select></Field>
+                      <div className="sm:col-span-2"><Field label="Message *" error={errors["message"]}><Textarea name="message" aria-invalid={Boolean(errors["message"])} placeholder="Tell us about your property and energy requirement" className="min-h-32" /></Field></div>
+                    </div>
+                    <Button type="submit" size="lg" className="mt-6 h-12 w-full sm:w-auto">Submit Enquiry <ArrowRight /></Button>
+                  </form>}
               </div>
             </div>
           </div>
@@ -435,8 +813,8 @@ function SolarWebsite() {
 
       <footer className="bg-[#101a27] text-on-dark">
         <div className="site-container grid gap-10 py-14 md:grid-cols-[1.4fr_.7fr_1fr]">
-          <div><BrandLogo footer /><p className="mt-5 max-w-sm text-sm leading-7 text-on-dark-muted">Today's choice Tomorrow's shines</p><div className="mt-6 flex gap-2"><SocialLink href="#" label="Facebook"><Facebook/></SocialLink><SocialLink href="#" label="Instagram"><Instagram/></SocialLink><SocialLink href={whatsappHref} label="WhatsApp"><MessageCircle/></SocialLink></div></div>
-          <div><h3 className="font-bold">Quick Links</h3><div className="mt-5 flex flex-col gap-3">{navItems.filter((_,i) => i !== 3).map(([label,href]) => <a key={href} href={href} className="text-sm text-on-dark-muted hover:text-primary">{label}</a>)}</div></div>
+          <div><BrandLogo footer /><p className="mt-5 max-w-sm text-sm leading-7 text-on-dark-muted">Today's choice Tomorrow's shines</p><div className="mt-6 flex gap-2"><SocialLink href="#" label="Facebook"><Facebook /></SocialLink><SocialLink href="#" label="Instagram"><Instagram /></SocialLink><SocialLink href={whatsappHref} label="WhatsApp"><MessageCircle /></SocialLink></div></div>
+          <div><h3 className="font-bold">Quick Links</h3><div className="mt-5 flex flex-col gap-3">{navItems.filter((_, i) => i !== 3).map(([label, href]) => <a key={href} href={href} className="text-sm text-on-dark-muted hover:text-primary">{label}</a>)}</div></div>
           <div><h3 className="font-bold">Contact</h3><div className="mt-5 space-y-3 text-sm leading-6 text-on-dark-muted"><a href={phoneHref} className="block hover:text-primary">+91 9024042324</a><a href="mailto:sunfaithenergysolutions@gmail.com" className="block break-all hover:text-primary">sunfaithenergysolutions@gmail.com</a><p>1-C-37 RHB Colony, Kunhari, Kota (Raj)</p></div></div>
         </div>
         <div className="border-t border-on-dark/10"><div className="site-container py-5 text-center text-xs text-on-dark-muted sm:text-left">© 2026 Sun Faith Energy Solutions. All rights reserved.</div></div>
