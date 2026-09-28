@@ -31,12 +31,14 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import heroImage from "@/assets/solar-hero.jpg";
-import teamImage from "@/assets/solar-team.jpg";
+import heroImage from "@/assets/a6f6e135-64bb-4ded-ade4-e92639d03a7d.png";
+import teamImage from "@/assets/e06d65f6-2e7e-4fe4-ad9d-d22af349e67e.png";
+import aboutImage from "@/assets/solar-team.jpg"
 import residentialImage from "@/assets/6410a889-ddbb-4587-9657-401cb7e8432b.png";
 import commercialImage from "@/assets/f8d2db6d-88e8-4641-8773-e1b025ed5a58.png";
 import industrialImage from "@/assets/85ef0831-d6f2-47f5-bf5b-d3c6757ab223.png";
-import maintenanceImage from "@/assets/solar-maintenance.jpg";
+import maintenanceImage from "@/assets/0bb701b5-9951-4745-a8f1-bf29c5bb0aa6.png";
+import newImage from "@/assets/solar-hero.jpg";
 
 const phoneHref = "tel:+919251245006";
 const whatsappHref = "https://wa.me/919251245006?text=Hello%20Sun%20Faith%20Energy%2C%20I%20want%20to%20know%20more%20about%20your%20solar%20solutions.";
@@ -48,20 +50,22 @@ function BrandLogo({ footer = false }: { footer?: boolean }) {
     <a
       href="#home"
       aria-label="Sun Faith Energy Solutions - Home"
-      className={`group flex shrink-0 items-center ${footer
-        ? "w-fit rounded-xl  px-4 py-2.5 shadow-lg"
-        : "w-[155px] sm:w-[178px]"
-        }`}
+      className={`group flex shrink-0 items-center ${
+        footer
+          ? "w-[280px] rounded-xl bg-white px-5 py-4 shadow-lg"
+          : "w-[190px] sm:w-[220px]"
+      }`}
     >
       <img
         src={logoSrc}
         alt="Sun Faith Energy Solutions"
-        width={178}
-        height={70}
+        width={260}
+        height={100}
         loading={footer ? "lazy" : "eager"}
         decoding="async"
-        className={`h-auto w-full object-contain transition-transform duration-300 group-hover:scale-[1.02] ${footer ? "max-h-16" : "max-h-14"
-          }`}
+        className={`h-auto w-full object-contain transition-transform duration-300 group-hover:scale-[1.02] ${
+          footer ? "max-h-24" : "max-h-20"
+        }`}
       />
     </a>
   );
@@ -226,7 +230,7 @@ function SolarWebsite() {
 
       <main>
         <section id="home" className="hero-section relative flex min-h-[760px] scroll-mt-20 items-center overflow-hidden pt-[76px]">
-          <img src={heroImage} alt="Rooftop solar panels on a modern home" width={1600} height={1008} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-[68%_center]" />
+          <img src={newImage} alt="Rooftop solar panels on a modern home" width={1600} height={1008} fetchPriority="high" className="absolute inset-0 h-full w-full object-cover object-[68%_center]" />
           <div className="hero-overlay absolute inset-0" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#101a27]/95 via-[#101a27]/75 to-[#101a27]/25" />
           <div className="solar-grid absolute inset-0 opacity-15" />
@@ -286,7 +290,7 @@ function SolarWebsite() {
           <div className="site-container grid items-center gap-12 lg:grid-cols-[1.05fr_.95fr] lg:gap-20">
             <div className="reveal relative">
               <div className="image-frame relative overflow-hidden rounded-[1.5rem] shadow-2xl">
-                <img src={teamImage} alt="Solar engineers assessing a rooftop panel installation" loading="lazy" width={1200} height={912} className="aspect-[4/3] w-full object-cover" />
+                <img src={aboutImage} alt="Solar engineers assessing a rooftop panel installation" loading="lazy" width={1200} height={912} className="aspect-[4/3] w-full object-cover" />
               </div>
               <div className="absolute -bottom-6 right-4 max-w-[300px] rounded-2xl border border-border bg-card/95 p-5 shadow-2xl backdrop-blur sm:right-[-18px]">
                 <div className="mb-3 flex items-center gap-2 text-primary"><Award className="size-5" /><span className="text-xs font-bold uppercase tracking-[0.16em]">Technical expertise</span></div>
@@ -417,29 +421,29 @@ function SolarWebsite() {
 
                 {
                   image: teamImage,
-                  title: "Solar Installation Team",
-                  location: "Project location to be updated",
-                  type: "Installation & Inspection",
+                  title: "Solar Inverter & Electrical Installation",
+                  location: "Kota, Rajasthan",
+                  type: "Residential Solar Installation",
                   description:
-                    "Solar installation and inspection work carried out by the technical team.",
+                    "A professionally executed residential solar installation featuring a Polycab inverter, electrical protection units and neatly organized conduit wiring.",
                 },
 
                 {
                   image: maintenanceImage,
-                  title: "Solar System Maintenance",
-                  location: "Project location to be updated",
-                  type: "Solar Maintenance",
+                  title: "Rooftop Solar Panel Installation",
+                  location: "Kota, Rajasthan",
+                  type: "Rooftop Solar Installation",
                   description:
-                    "Solar system maintenance and inspection work. Project-specific details will be added when available.",
+                    "A professionally structured rooftop solar installation with multiple solar panels mounted on a strong metal framework for efficient use of available rooftop space.",
                 },
 
                 {
                   image: heroImage,
-                  title: "Residential Rooftop Solar",
-                  location: "Project location to be updated",
-                  type: "Residential Solar",
+                  title: "Residential Rooftop Solar System",
+                  location: "Kota, Rajasthan",
+                  type: "Residential Solar Installation",
                   description:
-                    "Modern residential rooftop solar installation environment. Project-specific details will be added when available.",
+                    "A well-arranged residential rooftop solar system featuring multiple solar panels securely mounted on a durable support structure for reliable solar energy generation.",
                 },
               ].map((project, index) => (
 
@@ -813,7 +817,7 @@ function SolarWebsite() {
 
       <footer className="bg-[#101a27] text-on-dark">
         <div className="site-container grid gap-10 py-14 md:grid-cols-[1.4fr_.7fr_1fr]">
-          <div><BrandLogo footer /><p className="mt-5 max-w-sm text-sm leading-7 text-on-dark-muted">Today's choice Tomorrow's shines</p><div className="mt-6 flex gap-2"><SocialLink href="#" label="Facebook"><Facebook /></SocialLink><SocialLink href="#" label="Instagram"><Instagram /></SocialLink><SocialLink href={whatsappHref} label="WhatsApp"><MessageCircle /></SocialLink></div></div>
+          <div><BrandLogo footer /><p className="mt-5 max-w-sm text-sm leading-7 text-on-dark-muted">Today's choice Tomorrow's shines</p><div className="mt-6 flex gap-2"><SocialLink href="https://www.facebook.com/p/Sun-Faith-Energy-Solutions-100078064800789/" label="Facebook"><Facebook /></SocialLink><SocialLink href="#" label="Instagram"><Instagram /></SocialLink><SocialLink href={whatsappHref} label="WhatsApp"><MessageCircle /></SocialLink></div></div>
           <div><h3 className="font-bold">Quick Links</h3><div className="mt-5 flex flex-col gap-3">{navItems.filter((_, i) => i !== 3).map(([label, href]) => <a key={href} href={href} className="text-sm text-on-dark-muted hover:text-primary">{label}</a>)}</div></div>
           <div><h3 className="font-bold">Contact</h3><div className="mt-5 space-y-3 text-sm leading-6 text-on-dark-muted"><a href={phoneHref} className="block hover:text-primary">+91 9024042324</a><a href="mailto:sunfaithenergysolutions@gmail.com" className="block break-all hover:text-primary">sunfaithenergysolutions@gmail.com</a><p>1-C-37 RHB Colony, Kunhari, Kota (Raj)</p></div></div>
         </div>
