@@ -260,7 +260,7 @@ function SolarWebsite() {
               className="hidden items-center gap-2 rounded-full border border-border bg-muted/50 px-3.5 py-2 text-sm font-semibold text-foreground transition hover:border-primary/50 hover:bg-primary/5 xl:flex"
             >
               <Phone className="size-4 text-primary" />
-              <span>+919251245006</span>
+              <span>+919024042324</span>
             </a>
             <Button asChild className="hidden h-11 rounded-full px-5 shadow-sm sm:inline-flex">
               <a href="#contact">Get a Quote <ArrowRight /></a>
