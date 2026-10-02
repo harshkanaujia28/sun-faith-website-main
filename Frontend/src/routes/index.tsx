@@ -40,8 +40,8 @@ import industrialImage from "@/assets/85ef0831-d6f2-47f5-bf5b-d3c6757ab223.png";
 import maintenanceImage from "@/assets/0bb701b5-9951-4745-a8f1-bf29c5bb0aa6.png";
 import newImage from "@/assets/solar-hero.jpg";
 
-const phoneHref = "tel:+919251245006";
-const whatsappHref = "https://wa.me/919251245006?text=Hello%20Sun%20Faith%20Energy%2C%20I%20want%20to%20know%20more%20about%20your%20solar%20solutions.";
+const phoneHref = "tel:+919024042324";
+const whatsappHref = "https://wa.me/919024042324?text=Hello%20Sun%20Faith%20Energy%2C%20I%20want%20to%20know%20more%20about%20your%20solar%20solutions.";
 
 const logoSrc = "/sun-faith-energy-logo.png";
 
@@ -855,7 +855,7 @@ function SolarWebsite() {
                 <div className="rounded-[1.5rem] bg-foreground p-7 text-on-dark shadow-2xl sm:p-9">
                   <h3 className="text-xl font-bold">Contact information</h3>
                   <div className="mt-7 space-y-6">
-                    <a href={phoneHref} className="contact-row"><Phone /><span><small>Phone</small>+91 92512 45006 ,+91 9024042324</span></a>
+                    <a href={phoneHref} className="contact-row"><Phone /><span><small>Phone</small>+91 9024042324</span></a>
                     <a href="mailto:sunfaithenergysolutions@gmail.com" className="contact-row break-all"><Mail /><span><small>Email</small>sunfaithenergysolutions@gmail.com</span></a>
                     <div className="contact-row"><MapPin /><span><small>Address</small>1-C-37 RHB Colony, Kunhari, Kota (Raj)</span></div>
                   </div>
