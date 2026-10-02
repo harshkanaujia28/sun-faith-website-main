@@ -50,11 +50,10 @@ function BrandLogo({ footer = false }: { footer?: boolean }) {
     <a
       href="#home"
       aria-label="Sun Faith Energy Solutions - Home"
-      className={`group flex shrink-0 items-center ${
-        footer
-          ? "w-[280px] rounded-xl bg-white px-5 py-4 shadow-lg"
-          : "w-[190px] sm:w-[220px]"
-      }`}
+      className={`group flex shrink-0 items-center ${footer
+        ? "w-[280px] rounded-xl bg-white px-5 py-4 shadow-lg"
+        : "w-[190px] sm:w-[220px]"
+        }`}
     >
       <img
         src={logoSrc}
@@ -63,9 +62,8 @@ function BrandLogo({ footer = false }: { footer?: boolean }) {
         height={100}
         loading={footer ? "lazy" : "eager"}
         decoding="async"
-        className={`h-auto w-full object-contain transition-transform duration-300 group-hover:scale-[1.02] ${
-          footer ? "max-h-24" : "max-h-20"
-        }`}
+        className={`h-auto w-full object-contain transition-transform duration-300 group-hover:scale-[1.02] ${footer ? "max-h-24" : "max-h-20"
+          }`}
       />
     </a>
   );
@@ -150,22 +148,93 @@ function SolarWebsite() {
     return () => observer.disconnect();
   }, []);
 
-  const submitForm = (event: FormEvent<HTMLFormElement>) => {
+  const submitForm = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
+
+    const form = event.currentTarget;
+    const data = new FormData(form);
+
     const next: Record<string, string> = {};
+
     const name = String(data.get("name") || "").trim();
     const phone = String(data.get("phone") || "").replace(/\s/g, "");
     const email = String(data.get("email") || "").trim();
     const requirement = String(data.get("requirement") || "").trim();
     const message = String(data.get("message") || "").trim();
-    if (!name) next["name"] = "Please enter your name.";
-    if (!/^[6-9]\d{9}$/.test(phone)) next["phone"] = "Enter a valid 10-digit Indian mobile number.";
-    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next["email"] = "Enter a valid email address.";
-    if (!requirement) next["requirement"] = "Please select your requirement.";
-    if (!message) next["message"] = "Please tell us a little about your requirement.";
+
+    // Frontend validation
+    if (!name) {
+      next["name"] = "Please enter your name.";
+    }
+
+    if (!/^[6-9]\d{9}$/.test(phone)) {
+      next["phone"] = "Enter a valid 10-digit Indian mobile number.";
+    }
+
+    if (
+      email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+    ) {
+      next["email"] = "Enter a valid email address.";
+    }
+
+    if (!requirement) {
+      next["requirement"] = "Please select your requirement.";
+    }
+
+    if (!message) {
+      next["message"] =
+        "Please tell us a little about your requirement.";
+    }
+
     setErrors(next);
-    if (Object.keys(next).length === 0) setSubmitted(true);
+
+    // Stop if validation failed
+    if (Object.keys(next).length > 0) {
+      return;
+    }
+
+    try {
+      const apiUrl =
+        import.meta.env.VITE_API_URL || "http://localhost:5000";
+
+      const response = await fetch(`${apiUrl}/api/contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          phone,
+          email: email || undefined,
+          requirement,
+          message,
+          website: "",
+        }),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          result?.message || "Unable to send enquiry."
+        );
+      }
+
+      // Success
+      setSubmitted(true);
+      form.reset();
+      setErrors({});
+    } catch (error) {
+      console.error("Contact form error:", error);
+
+      setErrors({
+        form:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
+      });
+    }
   };
 
   return (
@@ -791,24 +860,166 @@ function SolarWebsite() {
                     <div className="contact-row"><MapPin /><span><small>Address</small>1-C-37 RHB Colony, Kunhari, Kota (Raj)</span></div>
                   </div>
                 </div>
-                <a href="https://www.google.com/maps/search/?api=1&query=Kunhari%2C%20Kota%2C%20Rajasthan" target="_blank" rel="noreferrer" className="map-card group block rounded-md border border-border bg-muted p-6">
-                  <div className="solar-grid h-28 rounded-md bg-secondary"><span className="grid h-full place-items-center"><MapPin className="size-10 text-primary transition-transform group-hover:-translate-y-1" /></span></div>
-                  <div className="mt-4 flex items-center justify-between gap-4"><div><p className="font-bold">Kunhari, Kota, Rajasthan</p><p className="mt-1 text-sm text-muted-foreground">Open location in Google Maps</p></div><ArrowRight className="size-5 text-primary" /></div>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=1C%2F38%2C%20RHB%20Colony%2C%20Kunadi%2C%20Electricity%20Board%20Area%2C%20Kota%2C%20Rajasthan"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="map-card group block rounded-md border border-border bg-muted p-6"
+                >
+                  <div className="solar-grid h-28 rounded-md bg-secondary">
+                    <span className="grid h-full place-items-center">
+                      <MapPin className="size-10 text-primary transition-transform group-hover:-translate-y-1" />
+                    </span>
+                  </div>
+
+                  <div className="mt-4 flex items-center justify-between gap-4">
+                    <div>
+                      <p className="font-bold">
+                        1C/38, RHB Colony, Kunadi, Kota
+                      </p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        Electricity Board Area, Kota, Rajasthan
+                      </p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        Open location in Google Maps
+                      </p>
+                    </div>
+
+                    <ArrowRight className="size-5 text-primary" />
+                  </div>
                 </a>
               </div>
               <div className="rounded-[1.5rem] border border-border bg-card p-6 shadow-xl sm:p-9">
-                {submitted ? <div className="flex min-h-[480px] flex-col items-center justify-center text-center" role="status"><span className="grid size-16 place-items-center rounded-full bg-success-soft text-success"><Check className="size-8" /></span><h3 className="mt-6 text-2xl font-bold">Thank you for your enquiry</h3><p className="mt-3 max-w-sm leading-7 text-muted-foreground">Your details have been noted in this demo. Please call or WhatsApp us for an immediate conversation.</p><Button className="mt-7" onClick={() => setSubmitted(false)}>Send another enquiry</Button></div> :
+                {submitted ? (
+                  <div
+                    className="flex min-h-[480px] flex-col items-center justify-center text-center"
+                    role="status"
+                  >
+                    <span className="grid size-16 place-items-center rounded-full bg-success-soft text-success">
+                      <Check className="size-8" />
+                    </span>
+
+                    <h3 className="mt-6 text-2xl font-bold">
+                      Thank you for your enquiry
+                    </h3>
+
+                    <p className="mt-3 max-w-sm leading-7 text-muted-foreground">
+                      Thank you for contacting us. Your enquiry has been sent successfully.
+                      Our team will get back to you shortly.
+                    </p>
+
+                    <Button
+                      className="mt-7"
+                      onClick={() => setSubmitted(false)}
+                    >
+                      Send another enquiry
+                    </Button>
+                  </div>
+                ) : (
                   <form onSubmit={submitForm} noValidate>
-                    <h3 className="text-2xl font-bold">Request a consultation</h3><p className="mt-2 text-sm text-muted-foreground">Fields marked with * are required.</p>
+                    <h3 className="text-2xl font-bold">
+                      Request a consultation
+                    </h3>
+
+                    <p className="mt-2 text-sm text-muted-foreground">
+                      Fields marked with * are required.
+                    </p>
+
                     <div className="mt-7 grid gap-5 sm:grid-cols-2">
-                      <Field label="Full Name *" error={errors["name"]}><Input name="name" autoComplete="name" aria-invalid={Boolean(errors["name"])} placeholder="Your full name" /></Field>
-                      <Field label="Phone Number *" error={errors["phone"]}><Input name="phone" type="tel" inputMode="numeric" autoComplete="tel" aria-invalid={Boolean(errors["phone"])} placeholder="10-digit mobile number" /></Field>
-                      <Field label="Email" error={errors["email"]}><Input name="email" type="email" autoComplete="email" aria-invalid={Boolean(errors["email"])} placeholder="you@example.com" /></Field>
-                      <Field label="Requirement *" error={errors["requirement"]}><select name="requirement" defaultValue="" aria-invalid={Boolean(errors["requirement"])} className="form-control"><option value="" disabled>Select a solution</option><option>Residential Solar</option><option>Commercial Solar</option><option>Industrial Solar</option><option>Installation</option><option>Maintenance</option><option>General Consultation</option></select></Field>
-                      <div className="sm:col-span-2"><Field label="Message *" error={errors["message"]}><Textarea name="message" aria-invalid={Boolean(errors["message"])} placeholder="Tell us about your property and energy requirement" className="min-h-32" /></Field></div>
+                      <Field
+                        label="Full Name *"
+                        error={errors["name"]}
+                      >
+                        <Input
+                          name="name"
+                          autoComplete="name"
+                          aria-invalid={Boolean(errors["name"])}
+                          placeholder="Your full name"
+                        />
+                      </Field>
+
+                      <Field
+                        label="Phone Number *"
+                        error={errors["phone"]}
+                      >
+                        <Input
+                          name="phone"
+                          type="tel"
+                          inputMode="numeric"
+                          autoComplete="tel"
+                          aria-invalid={Boolean(errors["phone"])}
+                          placeholder="10-digit mobile number"
+                        />
+                      </Field>
+
+                      <Field
+                        label="Email"
+                        error={errors["email"]}
+                      >
+                        <Input
+                          name="email"
+                          type="email"
+                          autoComplete="email"
+                          aria-invalid={Boolean(errors["email"])}
+                          placeholder="you@example.com"
+                        />
+                      </Field>
+
+                      <Field
+                        label="Requirement *"
+                        error={errors["requirement"]}
+                      >
+                        <select
+                          name="requirement"
+                          defaultValue=""
+                          aria-invalid={Boolean(errors["requirement"])}
+                          className="form-control"
+                        >
+                          <option value="" disabled>
+                            Select a solution
+                          </option>
+                          <option>Residential Solar</option>
+                          <option>Commercial Solar</option>
+                          <option>Industrial Solar</option>
+                          <option>Installation</option>
+                          <option>Maintenance</option>
+                          <option>General Consultation</option>
+                        </select>
+                      </Field>
+
+                      <div className="sm:col-span-2">
+                        <Field
+                          label="Message *"
+                          error={errors["message"]}
+                        >
+                          <Textarea
+                            name="message"
+                            aria-invalid={Boolean(errors["message"])}
+                            placeholder="Tell us about your property and energy requirement"
+                            className="min-h-32"
+                          />
+                        </Field>
+                      </div>
                     </div>
-                    <Button type="submit" size="lg" className="mt-6 h-12 w-full sm:w-auto">Submit Enquiry <ArrowRight /></Button>
-                  </form>}
+
+                    {errors.form && (
+                      <p
+                        className="mt-4 text-sm font-medium text-destructive"
+                        role="alert"
+                      >
+                        {errors.form}
+                      </p>
+                    )}
+
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="mt-6 h-12 w-full sm:w-auto"
+                    >
+                      Submit Enquiry <ArrowRight />
+                    </Button>
+                  </form>
+                )}
               </div>
             </div>
           </div>
